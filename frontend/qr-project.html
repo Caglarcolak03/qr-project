@@ -1,48 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR KOD OLUŞTURMA</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style> 
-   .ustTaraf {
-      display: flex;
-      justify-content: space-between;
-      
-      width: 100%;
-      gap:10px;
-      padding-top: 10px;
-      
-   }
-   
-    .buttonÖz{
-     background-color: rgb(55, 240, 153);
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
-    padding: 20px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    display:flex;
-    justify-content: flex-end;
+        /* Senin orijinal stillerin aynen kalıyor */
+        .ustTaraf {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 40px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-    align-items: center;
-    }
+        .logoBasligi {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-   
-     </style>
+        .fa-qrcode {
+            font-size: 35px; 
+            color: rgb(40,99, 237); 
+        }
+
+        .baslik {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .butonDuzenleme {
+            display: flex;
+            gap: 15px;
+        }
+
+        .buttonÖz {
+            background-color: rgb(40, 99, 237);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .buttonÖz:hover {
+            background-color: rgb(245, 45, 45);
+            transform: translateY(-3px);
+        }
+
+        #formKutusu {
+            display: none; 
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .inputStil {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-   <div class="ustTaraf">
-    
-      <button class="buttonÖz"> Giriş Yap </button>
-      <button class="buttonÖz" style="margin-right: 60px;">  Kayıt Ol</button>
-     
-   </div>
- 
-    <hr>
-  
-  
-    
+
+    <div class="ustTaraf">
+        <div class="logoBasligi">
+            <i class="fa-solid fa-qrcode"></i> <h1 class="baslik">QR Kod Tasarlama</h1>
+        </div>
+
+        <div class="butonDuzenleme">
+            <button class="buttonÖz" onclick="formuAc('giris')"> Giriş Yap </button>
+            <button class="buttonÖz" onclick="formuAc('kayit')"> Kayıt Ol </button>
+        </div>
+    </div>
+
+    <div id="formKutusu">
+        <h3 id="formBaslik">Bilgileri Girin</h3>
+        
+        <input type="text" id="adSoyadKutusu" placeholder="Ad Soyad" class="inputStil" style="display: none;">
+        
+        <input type="email" placeholder="E-posta" class="inputStil">
+        <input type="password" placeholder="Şifre" class="inputStil">
+        
+        <button class="buttonÖz">Gönder</button>
+        <p onclick="formuKapat()" style="color:red; cursor:pointer; margin-top:15px;">[Kapat]</p>
+    </div>
+
+    <script>
+        function formuAc(mod) {
+            // Önce formu görünür yapalım
+            document.getElementById("formKutusu").style.display = "block";
+            
+            // Eğer butondan 'kayit' bilgisi gelmişse Ad Soyad kutusunu göster
+            if (mod === 'kayit') {
+                document.getElementById("adSoyadKutusu").style.display = "block";
+                document.getElementById("formBaslik").innerText = "Kayıt Ol";
+            } else {
+                // Giriş yap seçildiyse Ad Soyad kutusunu gizli tut
+                document.getElementById("adSoyadKutusu").style.display = "none";
+                document.getElementById("formBaslik").innerText = "Giriş Yap";
+            }
+        }
+
+        function formuKapat() {
+            document.getElementById("formKutusu").style.display = "none";
+        }
+    </script>
+
 </body>
 </html>
