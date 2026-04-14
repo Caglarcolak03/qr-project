@@ -69,9 +69,8 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin: 170px auto;
+            margin: 40px auto;
             max-width: 900px;
-            
         }
 
         .akis-adim {
@@ -83,7 +82,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: 0.5s;
             border: 2px solid transparent;
-            border:2px solid #2863ed;
         }
 
         .akis-adim i {
@@ -92,8 +90,8 @@
             margin-bottom: 10px;
         }
 
-        /* Form Kutusu */
-        #formKutusu {
+        /* Form Kutuları */
+        #formKutusu, #menuBilgiKutusu {
             display: none; 
             width: 350px;
             margin: 20px auto; 
@@ -129,13 +127,22 @@
             transition: 0.3s;
             display: inline-flex;
             align-items: center;
-            gap: 100px;
+            gap: 10px;
         }
 
         .buyuk-qr-buton:hover {
             background-color: rgb(40, 99, 237);
             color: white;
             transform: scale(1.05);
+        }
+
+        #qrSonucAlani {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -152,11 +159,11 @@
     </div>
 
     <div class="akis-konteyner">
-        <div id="step1" class="akis-adim"><i class="fa-solid fa-user-check"></i><br><span>Kayıt Ol/Giriş Yap</span></div>
+        <div id="step1" class="akis-adim"><i class="fa-solid fa-user-check"></i><br><span>Giriş Yap</span></div>
         <i class="fa-solid fa-arrow-right" style="color:#ccc"></i>
-        <div id="step2" class="akis-adim"><i class="fa-solid fa-pencil"></i><br><span>'QR Oluştur' Butonuna Tıkla</span></div>
+        <div id="step3" class="akis-adim"><i class="fa-solid fa-pencil"></i><br><span>İçerik Bilgileri</span></div>
         <i class="fa-solid fa-arrow-right" style="color:#ccc"></i>
-        <div id="step3" class="akis-adim"><i class="fa-solid fa-wand-magic-sparkles"></i><br><span>İçerik Bilgilerini Doldur</span></div>
+        <div id="step2" class="akis-adim"><i class="fa-solid fa-wand-magic-sparkles"></i><br><span>QR Oluştur</span></div>
     </div>
 
     <div id="formKutusu">
@@ -165,25 +172,34 @@
         <input type="email" id="userEmail" placeholder="E-posta" class="inputStil">
         <input type="password" placeholder="Şifre" class="inputStil">
         <button class="buttonÖz" style="width: 100%; margin-top: 10px;" onclick="girisYap()">Gönder</button>
-        <p id="closeBtn" onclick="formuKapat()" style="color:rgb(40, 99, 237); cursor:pointer; margin-top:15px; font-size: 13px;">Kapat</p>
+        <p onclick="formuKapat()" style="color:rgb(40, 99, 237); cursor:pointer; margin-top:15px; font-size: 13px;">Kapat</p>
+    </div>
+
+    <div id="menuBilgiKutusu">
+        <h3 style="color: rgb(40, 99, 237);">Menü / İçerik Detayları</h3>
+        <input type="text" id="isletmeAdi" placeholder="İşletme veya Başlık Adı" class="inputStil">
+        <textarea id="icerikNotu" placeholder="QR içeriği (Link veya Menü Notu)" class="inputStil" style="height: 80px; font-family: Arial;"></textarea>
+        <p style="font-size: 12px; color: #666;">Bilgileri doldurduktan sonra aşağıdaki butona basın.</p>
     </div>
 
     <div class="ana-eylem-alani">
         <button id="mainQrBtn" class="buyuk-qr-buton" onclick="qrIslemi()">
             <i class="fa-solid fa-qrcode"></i> QR Oluştur
         </button>
+        <br>
+        <div id="qrSonucAlani" style="display:none;">
+            <p><b>QR Kodunuz Hazır!</b></p>
+            <img id="qrImage" src="" alt="QR Kod">
+            <br>
+            <button class="buttonÖz" style="margin-top:10px; background:#4caf50" onclick="window.print()">Yazdır</button>
+        </div>
     </div>
 
     <script>
         function formuAc(mod) {
             document.getElementById("formKutusu").style.display = "block";
-            if (mod === 'kayit') {
-                document.getElementById("userName").parentElement.querySelector('#userName').style.display = "block";
-                document.getElementById("formBaslik").innerText = "Kayıt Ol";
-            } else {
-                document.getElementById("userName").style.display = "none";
-                document.getElementById("formBaslik").innerText = "Giriş Yap";
-            }
+            document.getElementById("userName").style.display = (mod === 'kayit') ? "block" : "none";
+            document.getElementById("formBaslik").innerText = (mod === 'kayit') ? "Kayıt Ol" : "Giriş Yap";
             document.getElementById("formKutusu").scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -191,36 +207,46 @@
             document.getElementById("formKutusu").style.display = "none";
         }
 
-        // --- YENİ GİRİŞ YAPMA FONKSİYONU ---
         function girisYap() {
-            const name = document.getElementById("userName").value || "Değerli Kullanıcı";
-            
-            // 1. Formu kapat
+            const name = document.getElementById("userName").value || "Kullanıcı";
             formuKapat();
 
-            // 2. Üst menüyü değiştir
+            // Header Güncelleme
             document.getElementById("authButtons").innerHTML = `
-                <span style="font-weight:bold; color:#333;">Hoş geldin, ${name}</span>
+                <span style="font-weight:bold;">Merhaba, ${name}</span>
                 <button class="buttonÖz" style="background-color:#666; padding:8px 15px;" onclick="location.reload()">Çıkış</button>
             `;
 
-            // 3. Akış şemasını güncelle (Adım 1 tamamlandı efekti)
-            const s1 = document.getElementById("step1");
-            s1.style.backgroundColor = "#e8f5e9";
-            s1.style.borderColor = "#4caf50";
-            s1.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#4caf50"></i><br><span style="color:#2e7d32">Giriş Yapıldı</span>';
-
-            // 4. Ana butona efekt ver
-            const btn = document.getElementById("mainQrBtn");
-            btn.style.backgroundColor = "rgb(40, 99, 237)";
-            btn.style.color = "white";
-            btn.innerHTML = '<i class="fa-solid fa-qrcode"></i> QR Kodu Hazırla';
-
-            alert("Başarıyla giriş yapıldı!");
+            // Akış Güncelleme
+            document.getElementById("step1").style.backgroundColor = "#e8f5e9";
+            document.getElementById("step1").innerHTML = '<i class="fa-solid fa-circle-check" style="color:#4caf50"></i><br>Giriş Yapıldı';
+            
+            // Adım 2'yi (İçerik) Parlat ve Menü Formunu Aç
+            document.getElementById("step3").style.borderColor = "rgb(40, 99, 237)";
+            document.getElementById("menuBilgiKutusu").style.display = "block";
+            
+            alert("Giriş yapıldı! Şimdi menü bilgilerini girebilirsin.");
         }
 
         function qrIslemi() {
-            alert("QR Kod oluşturma işlemi başlatıldı!");
+            const icerik = document.getElementById("icerikNotu").value;
+            if(!icerik) {
+                alert("Lütfen önce içerik veya bir link girin!");
+                return;
+            }
+
+            // Basit bir QR API servisi kullanarak görsel oluşturma (Simülasyon)
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(icerik)}`;
+            
+            document.getElementById("qrImage").src = qrUrl;
+            document.getElementById("qrSonucAlani").style.display = "inline-block";
+            
+            // Akışın son adımını tamamla
+            document.getElementById("step2").style.backgroundColor = "#e8f5e9";
+            document.getElementById("step2").innerHTML = '<i class="fa-solid fa-wand-magic-sparkles" style="color:#4caf50"></i><br>QR Hazır!';
+            
+            alert("QR Kod Başarıyla Oluşturuldu!");
+            document.getElementById("qrSonucAlani").scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 
