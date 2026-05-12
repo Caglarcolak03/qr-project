@@ -4,484 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR MENÜ PRO | Profesyonel Menü Oluşturucu</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- Modern Fontlar -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style> 
-        :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --secondary: #10b981;
-            --danger: #ef4444;
-            --text-dark: #0f172a;
-            --text-gray: #64748b;
-            --bg-light: #f8fafc;
-            --white: #ffffff;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-            --radius: 16px;
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100vh;
-            transition: background 0.4s ease;
-            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-                        url('bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text-dark);
-        }
-
-        .sade-arka-plan {
-            background: var(--bg-light) !important;
-        }
-
-        /* Navbar Güzelleştirme */
-        .ustTaraf {
-            display: flex;
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 20px 8%;
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logoBasligi {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .logoBasligi:hover { transform: scale(1.02); }
-
-        .logoBasligi .fa-qrcode {
-            font-size: 36px;
-            color: var(--primary);
-            background: linear-gradient(135deg, var(--primary), #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .baslik {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--text-dark);
-        }
-
-        .butonDuzenleme {
-            display: flex;
-            gap: 15px;
-        }
-
-        /* Buton Stilleri */
-        .buttonÖz {
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 28px;
-            border-radius: var(--radius);
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .buttonÖz:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-        }
-
-        /* Hero Bölümü */
-        .hero-section {
-            text-align: center;
-            padding: 100px 20px 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .hero-section h2 {
-            font-size: clamp(32px, 5vw, 64px);
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 25px;
-            line-height: 1.1;
-            letter-spacing: -2px;
-        }
-
-        .hero-section p {
-            font-size: 20px;
-            color: var(--text-gray);
-            margin-bottom: 48px;
-            max-width: 750px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        /* Akış Adımları */
-        .akis-konteyner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin: 60px auto;
-            max-width: 1200px;
-        }
-
-        .akis-adim {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 40px 30px;
-            width: 280px;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        .akis-adim:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .akis-adim i, .akis-adim .step-qr-img {
-            font-size: 36px;
-            color: var(--primary);
-            margin-bottom: 24px;
-            background: rgba(79, 70, 229, 0.08);
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-radius: 22px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .akis-adim .step-qr-img {
-            padding: 15px;
-            object-fit: contain;
-            background: white;
-            border: 2px solid rgba(79, 70, 229, 0.1);
-        }
-
-        .akis-adim span {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--text-dark);
-            display: block;
-        }
-
-        /* İstatistik Bölümü */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            margin-top: 80px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.4);
-        }
-
-        .stat-item h3 { font-size: 32px; margin: 0; color: var(--primary); font-weight: 800; }
-        .stat-item p { font-size: 15px; margin: 8px 0 0; color: var(--text-gray); font-weight: 600; }
-
-        /* Formlar */
-        #formKutusu {
-            display: none; 
-            padding: 40px 20px;
-        }
-
-        .form-icerik {
-            background-color: var(--white);
-            padding: 50px;
-            border-radius: 32px;
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .inputStil {
-            width: 100%;
-            padding: 16px;
-            margin: 12px 0;
-            border-radius: 14px;
-            border: 2px solid #eef2f6;
-            box-sizing: border-box;
-            transition: 0.3s;
-            font-family: inherit;
-            font-size: 15px;
-            background: #fcfdfe;
-        }
-
-        .inputStil:focus {
-            border-color: var(--primary);
-            outline: none;
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-        }
-
-        .buyuk-qr-buton {
-            background: var(--white);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 22px 50px;
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 22px;
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.15);
-        }
-
-        .buyuk-qr-buton:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.25);
-        }
-
-        /* Panel Düzenlemeleri */
-        #menuPaneli {
-            display: none;
-            max-width: 900px;
-            margin: 50px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 32px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .kategori-kutu {
-            margin-bottom: 30px;
-            padding: 30px;
-            background: #f8fafc;
-            border-radius: 24px;
-            border: 2px solid #f1f5f9;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .kategori-kutu:hover {
-            border-color: #e2e8f0;
-            background: #f1f5f9;
-        }
-
-        .urun-satiri {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 18px;
-            box-shadow: var(--shadow-sm);
-            align-items: center;
-        }
-
-        .dosya-sec {
-            font-size: 11px;
-            border: none;
-            background: #f1f5f9;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            max-width: 100px;
-        }
-
-        .urun-onizleme {
-            width: 56px;
-            height: 56px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            display: none;
-            flex-shrink: 0;
-        }
-
-        .urun-onizleme.goster {
-            display: block;
-        }
-
-        .dosya-alan {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #qrResim {
-            border: 12px solid white;
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-            margin: 30px 0;
-            transition: 0.3s;
-        }
-
-        /* Müşteri Menüsü Önizleme */
-        #musteriMenusu {
-            display: none;
-            max-width: 480px;
-            margin: 40px auto;
-            background: white;
-            padding: 40px 30px;
-            border-radius: 35px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-        }
-
-        .m-urun-img {
-            width: 75px;
-            height: 75px;
-            object-fit: cover;
-            border-radius: 18px;
-            margin-right: 18px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .kategori-baslik-input {
-            border: none;
-            background: transparent;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 20px;
-            width: 70%;
-            padding: 10px 0;
-            border-bottom: 3px solid #e2e8f0;
-            transition: 0.3s;
-        }
-
-        .kategori-baslik-input:focus {
-            outline: none;
-            border-bottom-color: var(--primary);
-        }
-
-        .kat-sil-btn {
-            position: absolute;
-            right: 25px;
-            top: 30px;
-            background: #fee2e2;
-            color: var(--danger);
-            border: none;
-            padding: 10px 16px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        @media (max-width: 768px) {
-            .ustTaraf { padding: 15px 5%; }
-            .akis-konteyner { flex-direction: column; }
-            .fa-chevron-right { transform: rotate(90deg); opacity: 0.3; }
-            .stats-bar { gap: 30px; padding: 20px; }
-            .hero-section h2 { font-size: 38px; }
-            #menuPaneli { margin: 15px; padding: 25px; }
-            .form-icerik { padding: 30px; }
-            .urun-satiri { flex-wrap: wrap; }
-            .urun-ad { width: 100% !important; }
-        }
-
-        .kat-filtre-btn {
-            padding: 8px 18px;
-            border-radius: 100px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-gray);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .kat-filtre-btn.aktif, .kat-filtre-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .qr-placeholder {
-            width: 280px;
-            height: 280px;
-            background: #f8fafc;
-            border-radius: 24px;
-            border: 2px dashed #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 30px auto;
-            color: #cbd5e1;
-            gap: 12px;
-        }
-
-        .qr-placeholder i { font-size: 64px; }
-        .qr-placeholder span { font-size: 14px; font-weight: 600; }
-
-        /* Animasyonlar */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        #anaIcerik, #formKutusu, #menuPaneli {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- ── Navbar ──────────────────────────────────────────────────────────── -->
     <div class="ustTaraf" id="navbar">
-        <div class="logoBasligi" onclick="window.anaSayfayaDon()">
-            <i class="fa-solid fa-qrcode"></i> <h1 class="baslik">QR MENÜ PRO</h1>
+        <div class="logoBasligi" onclick="window.anasayfayaDon()">
+            <i class="fa-solid fa-qrcode"></i>
+            <h1 class="baslik">QR MENÜ PRO</h1>
         </div>
         <div id="authButtons" class="butonDuzenleme">
-            <button class="buttonÖz" id="navLoginBtn" onclick="window.formuAc('giris')" style="background: transparent; color: var(--primary); border: 2px solid var(--primary); box-shadow: none;"> Giriş Yap </button>
-            <button class="buttonÖz" id="navRegisterBtn" onclick="window.formuAc('kayit')"> Ücretsiz Kayıt Ol </button>
+            <button class="buttonÖz" id="navLoginBtn"
+                onclick="window.kimlikFormunuAc('giris')"
+                style="background: transparent; color: var(--primary); border: 2px solid var(--primary); box-shadow: none;">
+                Giriş Yap
+            </button>
+            <button class="buttonÖz" id="navRegisterBtn" onclick="window.kimlikFormunuAc('kayit')">
+                Ücretsiz Kayıt Ol
+            </button>
         </div>
     </div>
 
+    <!-- ── Ana Sayfa ────────────────────────────────────────────────────────── -->
     <div id="anaIcerik">
         <div class="hero-section">
             <h2>Dijital Katalog ile<br><span style="color: var(--primary);">İşinizi Büyütün.</span></h2>
             <p>Sadece restoranlar için değil; kuaförler, mağazalar ve tüm hizmet sektörleri için tasarlandı. Profesyonel görünümünüzü QR kod ile dünyaya açın.</p>
-            
+
             <div class="akis-konteyner">
-                <div id="step1" class="akis-adim"><i class="fa-solid fa-circle-user"></i><br><span>Hesap Oluştur</span></div>
+                <div id="step1" class="akis-adim">
+                    <i class="fa-solid fa-circle-user"></i><br>
+                    <span>Hesap Oluştur</span>
+                </div>
                 <i class="fa-solid fa-chevron-right" style="color:#cbd5e1; font-size: 24px;"></i>
-                <div id="step2" class="akis-adim"><i class="fa-solid fa-pen-to-square"></i><br><span>İçerik Gir / Düzenle</span></div>
+                <div id="step2" class="akis-adim">
+                    <i class="fa-solid fa-pen-to-square"></i><br>
+                    <span>İçerik Gir / Düzenle</span>
+                </div>
                 <i class="fa-solid fa-chevron-right" style="color:#cbd5e1; font-size: 24px;"></i>
-                <div id="step3" class="akis-adim"><i class="fa-solid fa-qrcode"></i><br><span>QR'ı Paylaş</span></div>
+                <div id="step3" class="akis-adim">
+                    <i class="fa-solid fa-qrcode"></i><br>
+                    <span>QR'ı Paylaş</span>
+                </div>
             </div>
 
             <div class="stats-bar">
@@ -492,45 +60,61 @@
         </div>
 
         <div class="ana-eylem-alani" style="text-align: center; margin-bottom: 100px;">
-            <button id="mainQrBtn" class="buyuk-qr-buton" onclick="window.qrIslemi()">
+            <button id="mainQrBtn" class="buyuk-qr-buton" onclick="window.menuDuzenleyiciAc()">
                 <i class="fa-solid fa-pen-to-square"></i> Hemen Kataloğunu Oluştur
             </button>
             <div style="margin-top: 30px; color: var(--text-gray); font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <i class="fa-solid fa-circle-check" style="color: var(--secondary); font-size: 18px;"></i> Kredi kartı gerekmez • 2 dakikada hazır
+                <i class="fa-solid fa-circle-check" style="color: var(--secondary); font-size: 18px;"></i>
+                Kredi kartı gerekmez • 2 dakikada hazır
             </div>
         </div>
     </div>
 
+    <!-- ── Kimlik Formu (Giriş / Kayıt) ────────────────────────────────────── -->
     <div id="formKutusu" style="display: none; justify-content: center; align-items: center; min-height: 80vh;">
         <div class="form-icerik">
             <h3 id="formBaslik" style="margin-top: 0; font-size: 28px; font-weight: 800; letter-spacing: -1px;">Kayıt Ol</h3>
             <p style="color: var(--text-gray); font-size: 15px; margin-bottom: 30px;">Hemen kataloğunu hazırlamaya başla.</p>
-            <input type="text" id="userName" placeholder="Ad Soyad" class="inputStil">
-            <input type="email" id="userEmail" placeholder="E-posta Adresiniz" class="inputStil">
+            <input type="text"     id="userName"     placeholder="Ad Soyad"               class="inputStil">
+            <input type="email"    id="userEmail"    placeholder="E-posta Adresiniz"       class="inputStil">
             <input type="password" id="userPassword" placeholder="Şifre (min. 6 karakter)" class="inputStil">
-            <button id="formSubmitBtn" class="buttonÖz" style="width: 100%; margin-top: 15px; padding: 18px; font-size: 16px;" onclick="window.girisYap()">Kayıt Ol</button>
-            <p id="closeBtn" onclick="window.formuKapat()" style="color:var(--text-gray); cursor:pointer; margin-top:25px; font-size: 14px; text-decoration: none; font-weight: 600; text-align: center;">
+            <button id="formSubmitBtn" class="buttonÖz"
+                style="width: 100%; margin-top: 15px; padding: 18px; font-size: 16px;"
+                onclick="window.kimlikDogrula()">
+                Kayıt Ol
+            </button>
+            <p onclick="window.kimlikFormunuKapat()"
+               style="color:var(--text-gray); cursor:pointer; margin-top:25px; font-size: 14px; font-weight: 600; text-align: center;">
                 <i class="fa-solid fa-arrow-left"></i> Vazgeç ve Dön
             </p>
         </div>
     </div>
 
+    <!-- ── Menü Düzenleyici Paneli ──────────────────────────────────────────── -->
     <div id="menuPaneli">
-        <h2 style="text-align: center; color: var(--text-dark); margin-bottom: 40px; font-weight: 800; font-size: 32px; letter-spacing: -1px;">Katalog Tasarım Paneli</h2>
+        <h2 style="text-align: center; color: var(--text-dark); margin-bottom: 40px; font-weight: 800; font-size: 32px; letter-spacing: -1px;">
+            Katalog Tasarım Paneli
+        </h2>
+
         <div style="margin-bottom: 40px;">
-            <label style="font-weight: 700; font-size: 15px; color: var(--text-dark); margin-left: 5px; display: block; margin-bottom: 8px;">İşletme / Katalog Adı</label>
-            <input type="text" id="cafeAdi" placeholder="Örn: Laz Kafe veya Bozo Pide vs." class="inputStil" style="font-size: 18px; font-weight: 700; padding: 20px;">
+            <label style="font-weight: 700; font-size: 15px; color: var(--text-dark); margin-left: 5px; display: block; margin-bottom: 8px;">
+                İşletme / Katalog Adı
+            </label>
+            <input type="text" id="cafeAdi" placeholder="Örn: Laz Kafe veya Bozo Pide vs."
+                class="inputStil" style="font-size: 18px; font-weight: 700; padding: 20px;">
         </div>
 
-        <div id="kategoriListesi">
-            <!-- Kategoriler dinamik eklenecek -->
-        </div>
+        <div id="kategoriListesi"></div>
 
-        <button class="buttonÖz" style="background-color: #f1f5f9; color: var(--text-dark); margin-bottom: 25px; width: 100%; box-shadow: none; border: 2px dashed #cbd5e1;" onclick="window.yeniKategoriEkle()">
+        <button class="buttonÖz"
+            style="background-color: #f1f5f9; color: var(--text-dark); margin-bottom: 25px; width: 100%; box-shadow: none; border: 2px dashed #cbd5e1;"
+            onclick="window.kategoriEkle()">
             <i class="fa-solid fa-plus-circle"></i> Yeni Kategori Ekle
         </button>
 
-        <button id="qrOlusturBtn" class="buttonÖz" style="width: 100%; margin-top: 20px; padding: 22px; font-size: 18px;" onclick="window.gercekQrOlustur()">
+        <button id="qrOlusturBtn" class="buttonÖz"
+            style="width: 100%; margin-top: 20px; padding: 22px; font-size: 18px;"
+            onclick="window.menuKaydetVeQrOlustur()">
             <i class="fa-solid fa-pen-to-square"></i> KATALOĞU VE QR KODU OLUŞTUR
         </button>
 
@@ -541,18 +125,23 @@
                     <i class="fa-solid fa-qrcode"></i>
                     <span>QR kod burada görünecek</span>
                 </div>
-                <img id="qrResim" src="" alt="QR Kod" style="width: 280px; height: 280px; display:none; border: 12px solid white; border-radius: 24px; box-shadow: var(--shadow-lg); margin: 30px auto; display:none;">
+                <img id="qrResim" src="" alt="QR Kod"
+                    style="width: 280px; height: 280px; display:none; border: 12px solid white; border-radius: 24px; box-shadow: var(--shadow-lg); margin: 30px auto;">
             </div>
             <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
-                <button id="previewBtn" class="buttonÖz" style="background-color: var(--secondary); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); width: 100%; max-width: 300px;">
+                <button id="previewBtn" class="buttonÖz"
+                    style="background-color: var(--secondary); box-shadow: 0 4px 12px rgba(16,185,129,0.2); width: 100%; max-width: 300px;">
                     <i class="fa-solid fa-eye"></i> ÖNİZLEMEYİ GÖR
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- ── Müşteri Menüsü Görünümü ──────────────────────────────────────────── -->
     <div id="musteriMenusu">
-        <h2 id="m-isletmeAdi" style="text-align: center; color: var(--primary); font-size: 32px; font-weight: 800; margin-bottom: 24px; letter-spacing: -1px;"></h2>
+        <h2 id="m-isletmeAdi"
+            style="text-align: center; color: var(--primary); font-size: 32px; font-weight: 800; margin-bottom: 24px; letter-spacing: -1px;">
+        </h2>
         <div id="m-filtre-alan"></div>
         <div id="m-liste"></div>
         <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #f1f5f9;">
@@ -560,617 +149,9 @@
         </div>
     </div>
 
+    <!-- ── Admin Paneli ──────────────────────────────────────────────────────── -->
     <div id="adminPaneli" style="display:none; max-width:1000px; margin:50px auto; padding:50px 30px;"></div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBWOftjFRHdeSKvTNs9PdSqe2qx3OaAE0w",
-            authDomain: "qr-project-be489.firebaseapp.com",
-            projectId: "qr-project-be489",
-            storageBucket: "qr-project-be489.firebasestorage.app",
-            messagingSenderId: "610728679687",
-            appId: "1:610728679687:web:7a735b5918a5c0cfa98da2",
-            measurementId: "G-QRGKK87EET"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        let formModu = 'kayit';
-        let katSayac = 0;
-        let tumMenuVerisi = null;
-        window.secilenKategori = 'Tümü';
-
-        // Kullanıcı oturumu değiştiğinde UI'yi güncelle + rol kontrolü
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                let role = 'owner';
-                let goruntelenecekIsim = user.email;
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    if (userDoc.exists()) {
-                        role = userDoc.data().role || 'owner';
-                        goruntelenecekIsim = userDoc.data().isim || user.email;
-                    }
-                } catch(e) {}
-
-                const adminBtn = role === 'admin'
-                    ? `<button class="buttonÖz" onclick="window.adminPaneliniAc()" style="background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 4px 12px rgba(245,158,11,0.3);padding:8px 16px;font-size:13px;"><i class="fa-solid fa-shield-halved"></i> Admin Paneli</button>`
-                    : '';
-                const menuBtn = role === 'owner'
-                    ? `<button class="buttonÖz" onclick="window.menuleriniGoster()" style="padding:8px 16px;font-size:13px;"><i class="fa-solid fa-list"></i> Menüm</button>`
-                    : '';
-
-                document.getElementById("authButtons").innerHTML = `
-                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                        ${adminBtn}${menuBtn}
-                        <span style="font-weight:700; color:var(--primary); background: rgba(79, 70, 229, 0.1); padding: 8px 16px; border-radius: 12px; font-size:14px;">
-                            <i class="fa-solid fa-circle-user"></i> ${goruntelenecekIsim}
-                        </span>
-                        <button class="buttonÖz" onclick="window.cikisYap()" style="background:#fee2e2; color:var(--danger); border:none; padding:8px 15px; box-shadow:none; font-size:13px;">Çıkış</button>
-                    </div>`;
-                document.getElementById("mainQrBtn").style.backgroundColor = "var(--primary)";
-                document.getElementById("mainQrBtn").style.color = "white";
-            } else {
-                document.getElementById("authButtons").innerHTML = `
-                    <button class="buttonÖz" id="navLoginBtn" onclick="window.formuAc('giris')" style="background: transparent; color: var(--primary); border: 2px solid var(--primary); box-shadow: none;"> Giriş Yap </button>
-                    <button class="buttonÖz" id="navRegisterBtn" onclick="window.formuAc('kayit')"> Ücretsiz Kayıt Ol </button>`;
-                document.getElementById("mainQrBtn").style.backgroundColor = "white";
-                document.getElementById("mainQrBtn").style.color = "var(--primary)";
-            }
-        });
-
-        window.onpopstate = function(event) {
-            tümPanelleriKapat();
-            if (event.state && event.state.panel === 'form') {
-                window.formuAc(event.state.mod, true);
-            } else if (event.state && event.state.panel === 'menu') {
-                window.qrIslemi(true);
-            } else {
-                window.anaSayfayaDon(true);
-            }
-        };
-
-        function tümPanelleriKapat() {
-            document.body.classList.remove("sade-arka-plan");
-            document.getElementById("anaIcerik").style.display = "none";
-            document.getElementById("formKutusu").style.display = "none";
-            document.getElementById("menuPaneli").style.display = "none";
-            document.getElementById("musteriMenusu").style.display = "none";
-            document.getElementById("adminPaneli").style.display = "none";
-            document.getElementById("navbar").style.display = "flex";
-        }
-
-        // QR tarandığında Firestore'dan menüyü çek
-        window.addEventListener('load', async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const menuId = urlParams.get('menu');
-            if (menuId) {
-                try {
-                    const docSnap = await getDoc(doc(db, "menus", menuId));
-                    if (docSnap.exists()) {
-                        musteriGorunumuAc(docSnap.data());
-                    } else {
-                        alert("Menü bulunamadı.");
-                        window.anaSayfayaDon(true);
-                    }
-                } catch(e) {
-                    console.error("Menü yüklenemedi:", e);
-                    window.anaSayfayaDon(true);
-                }
-            } else {
-                window.anaSayfayaDon(true);
-            }
-        });
-
-        window.formuAc = function(mod, isBack = false) {
-            formModu = mod;
-            tümPanelleriKapat();
-            document.body.classList.add("sade-arka-plan");
-            document.getElementById("formKutusu").style.display = "flex";
-
-            const baslik = document.getElementById("formBaslik");
-            const buton = document.getElementById("formSubmitBtn");
-            const isimAlani = document.getElementById("userName");
-
-            if(mod === 'kayit') {
-                baslik.innerText = "Kayıt Ol";
-                buton.innerText = "Kayıt Ol";
-                isimAlani.style.display = "block";
-            } else {
-                baslik.innerText = "Giriş Yap";
-                buton.innerText = "Giriş Yap";
-                isimAlani.style.display = "none";
-            }
-
-            if(!isBack) history.pushState({panel: 'form', mod: mod}, "");
-        };
-
-        window.formuKapat = function() { history.back(); };
-
-        window.anaSayfayaDon = function(isBack = false) {
-            tümPanelleriKapat();
-            document.getElementById("anaIcerik").style.display = "block";
-            if(!isBack) history.pushState({panel: 'home'}, "");
-        };
-
-        window.girisYap = async function() {
-            const email = document.getElementById("userEmail").value.trim();
-            const password = document.getElementById("userPassword").value;
-            const buton = document.getElementById("formSubmitBtn");
-
-            if(!email || !password) { alert("E-posta ve şifre giriniz."); return; }
-
-            buton.disabled = true;
-            buton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Lütfen bekleyin...';
-
-            try {
-                if (formModu === 'kayit') {
-                    const cred = await createUserWithEmailAndPassword(auth, email, password);
-                    const isim = document.getElementById("userName").value.trim();
-                    await setDoc(doc(db, "users", cred.user.uid), {
-                        email: email,
-                        isim: isim,
-                        role: 'owner',
-                        kayitTarihi: new Date().toISOString()
-                    });
-                } else {
-                    await signInWithEmailAndPassword(auth, email, password);
-                }
-                window.anaSayfayaDon();
-            } catch (error) {
-                const mesajlar = {
-                    'auth/email-already-in-use': 'Bu e-posta zaten kayıtlı.',
-                    'auth/invalid-email': 'Geçersiz e-posta adresi.',
-                    'auth/weak-password': 'Şifre en az 6 karakter olmalı.',
-                    'auth/user-not-found': 'E-posta veya şifre hatalı.',
-                    'auth/wrong-password': 'E-posta veya şifre hatalı.',
-                    'auth/invalid-credential': 'E-posta veya şifre hatalı.',
-                };
-                alert(mesajlar[error.code] || 'Bir hata oluştu: ' + error.message);
-            } finally {
-                buton.disabled = false;
-                buton.innerText = formModu === 'kayit' ? "Kayıt Ol" : "Giriş Yap";
-            }
-        };
-
-        window.cikisYap = async function() {
-            if(confirm("Çıkış yapmak istediğinize emin misiniz?")) {
-                await signOut(auth);
-                window.anaSayfayaDon();
-            }
-        };
-
-        window.qrIslemi = function(isBack = false) {
-            if(!auth.currentUser) { alert("Lütfen önce giriş yapın!"); window.formuAc('giris'); return; }
-            tümPanelleriKapat();
-            document.body.classList.add("sade-arka-plan");
-            document.getElementById("menuPaneli").style.display = "block";
-            if(document.getElementById("kategoriListesi").children.length === 0) {
-                window.yeniKategoriEkle();
-            }
-            if(!isBack) history.pushState({panel: 'menu'}, "");
-        };
-
-        function urunSatiriHTML(item = null) {
-            const ad = item ? (item.a || '') : '';
-            const fiyat = item ? (item.f || '') : '';
-            const img = item && item.i ? item.i : '';
-            return `
-                <input type="text" placeholder="Ürün Adı" class="inputStil urun-ad" style="width:40%;" value="${ad}">
-                <input type="text" placeholder="Fiyat" class="inputStil urun-fiyat" style="width:18%;" value="${fiyat}">
-                <div class="dosya-alan">
-                    <input type="file" class="dosya-sec urun-img" accept="image/*" data-existing="${img}">
-                    <img class="urun-onizleme ${img ? 'goster' : ''}" src="${img}" alt="önizleme">
-                </div>
-                <button type="button" onclick="this.closest('.urun-satiri').remove()" title="Ürünü kaldır" style="background:#fee2e2;color:var(--danger);border:none;padding:6px 8px;border-radius:8px;cursor:pointer;flex-shrink:0;font-size:11px;">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            `;
-        }
-
-        function onizlemeEkle(satir) {
-            const dosyaInput = satir.querySelector(".urun-img");
-            const onizleme = satir.querySelector(".urun-onizleme");
-            dosyaInput.addEventListener("change", function() {
-                if (this.files && this.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        onizleme.src = e.target.result;
-                        onizleme.classList.add("goster");
-                    };
-                    reader.readAsDataURL(this.files[0]);
-                }
-            });
-        }
-
-        window.yeniKategoriEkle = function() {
-            katSayac++;
-            const liste = document.getElementById("kategoriListesi");
-            const katDiv = document.createElement("div");
-            katDiv.className = "kategori-kutu";
-            katDiv.id = "kat-container-" + katSayac;
-            katDiv.innerHTML = `
-                <button class="kat-sil-btn" onclick="window.kategoriSil(${katSayac})"><i class="fa-solid fa-trash"></i></button>
-                <input type="text" class="kategori-baslik-input kat-baslik" placeholder="Kategori Adı (Örn: Pideler)">
-                <div id="liste-urunler-${katSayac}">
-                    <div class="urun-satiri">${urunSatiriHTML()}</div>
-                </div>
-                <button class="buttonÖz" style="background-color: #ffffff; color: var(--primary); padding: 10px 18px; font-size: 13px; box-shadow: var(--shadow-sm); margin-top:10px; border: 1px solid #e2e8f0;" onclick="window.yeniUrunEkle(${katSayac})">
-                    <i class="fa-solid fa-plus"></i> Yeni Ürün
-                </button>
-            `;
-            liste.appendChild(katDiv);
-            onizlemeEkle(katDiv.querySelector(".urun-satiri"));
-        };
-
-        window.kategoriSil = function(id) {
-            if(confirm("Bu kategoriyi silmek istediğinize emin misiniz?")) {
-                document.getElementById("kat-container-" + id).remove();
-            }
-        };
-
-        window.yeniUrunEkle = function(katId) {
-            const liste = document.getElementById("liste-urunler-" + katId);
-            const div = document.createElement("div");
-            div.className = "urun-satiri";
-            div.innerHTML = urunSatiriHTML();
-            liste.appendChild(div);
-            onizlemeEkle(div);
-        };
-
-        function fileToSmallBase64(file) {
-            return new Promise((resolve) => {
-                if(!file) { resolve(null); return; }
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const max_size = 400;
-                        let w = img.width, h = img.height;
-                        if (w > h) { if (w > max_size) { h *= max_size / w; w = max_size; } }
-                        else { if (h > max_size) { w *= max_size / h; h = max_size; } }
-                        canvas.width = w; canvas.height = h;
-                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        resolve(canvas.toDataURL('image/jpeg', 0.85));
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        window.gercekQrOlustur = async function() {
-            const user = auth.currentUser;
-            if (!user) return;
-
-            const btn = document.getElementById("qrOlusturBtn");
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Firebase\'e kaydediliyor...';
-
-            try {
-                const cafe = document.getElementById("cafeAdi").value || "İşletme Kataloğu";
-                let items = [];
-                const kategoriler = document.getElementsByClassName("kategori-kutu");
-
-                for(let kat of kategoriler) {
-                    const katBaslik = kat.querySelector(".kat-baslik").value || "Genel";
-                    const urunSatirlari = kat.querySelectorAll(".urun-satiri");
-                    for(let satir of urunSatirlari) {
-                        const ad = satir.querySelector(".urun-ad").value.trim();
-                        const fiyat = satir.querySelector(".urun-fiyat").value.trim();
-                        const imgInput = satir.querySelector(".urun-img");
-                        const dosya = imgInput.files[0];
-                        const mevcutImg = imgInput.dataset.existing || null;
-                        if(ad) {
-                            const base64 = dosya ? await fileToSmallBase64(dosya) : mevcutImg;
-                            items.push({ k: katBaslik, a: ad, f: fiyat, i: base64 });
-                        }
-                    }
-                }
-
-                await setDoc(doc(db, "menus", user.uid), {
-                    c: cafe,
-                    items: items,
-                    guncellendi: new Date().toISOString()
-                });
-
-                const sonLink = window.location.origin + window.location.pathname + "?menu=" + user.uid;
-                const qrResim = document.getElementById("qrResim");
-                qrResim.src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(sonLink);
-                qrResim.style.display = "block";
-                document.getElementById("qrPlaceholder").style.display = "none";
-                document.getElementById("qrCiktisi").style.display = "block";
-                document.getElementById("previewBtn").onclick = function() { window.open(sonLink, '_blank'); };
-                document.getElementById("qrCiktisi").scrollIntoView({ behavior: 'smooth' });
-
-            } catch(e) {
-                console.error(e);
-                alert("Hata: " + e.message);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> KATALOĞU VE QR KODU OLUŞTUR';
-            }
-        };
-
-        // ── Admin Paneli ──────────────────────────────────────────────
-        window.adminPaneliniAc = async function() {
-            tümPanelleriKapat();
-            document.body.classList.add("sade-arka-plan");
-            const panel = document.getElementById("adminPaneli");
-            panel.style.display = "block";
-            panel.innerHTML = `<div style="text-align:center;padding:60px;"><i class="fa-solid fa-spinner fa-spin" style="font-size:36px;color:var(--primary);"></i></div>`;
-
-            try {
-                const [menuSnap, userSnap] = await Promise.all([
-                    getDocs(collection(db, "menus")),
-                    getDocs(collection(db, "users"))
-                ]);
-
-                const kullanicilar = {};
-                userSnap.forEach(d => { kullanicilar[d.id] = d.data(); });
-
-                let html = `
-                    <h2 style="text-align:center;font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;">
-                        <i class="fa-solid fa-shield-halved" style="color:#f59e0b;"></i> Admin Paneli
-                    </h2>
-                    <p style="text-align:center;color:var(--text-gray);margin-bottom:24px;">${menuSnap.size} işletme kayıtlı</p>
-                    <input type="text" id="adminArama" placeholder="🔍  İşletme adı veya e-posta ara..." class="inputStil" oninput="window.adminFiltrele()" style="margin-bottom:24px;">
-                    <div id="adminKartlar" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;">
-                `;
-
-                if (menuSnap.empty) {
-                    html += `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-gray);font-size:16px;font-weight:600;">Henüz kayıtlı menü yok.</div>`;
-                } else {
-                    menuSnap.forEach(d => {
-                        const menu = d.data();
-                        const kullanici = kullanicilar[d.id] || {};
-                        const menuLink = window.location.origin + window.location.pathname + "?menu=" + d.id;
-                        const tarih = menu.guncellendi ? new Date(menu.guncellendi).toLocaleDateString('tr-TR') : '-';
-                        const urunlerHTML = (menu.items || []).map((item, idx) => `
-                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9;gap:8px;">
-                                <div style="display:flex;align-items:center;gap:8px;min-width:0;">
-                                    ${item.i ? `<img src="${item.i}" style="width:36px;height:36px;object-fit:cover;border-radius:8px;flex-shrink:0;">` : '<div style="width:36px;height:36px;background:#f1f5f9;border-radius:8px;flex-shrink:0;"></div>'}
-                                    <span style="font-size:13px;font-weight:600;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.a}</span>
-                                </div>
-                                <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-                                    <span style="font-size:13px;font-weight:700;color:var(--primary);">${item.f}</span>
-                                    <button onclick="window.adminUrunSil('${d.id}',${idx})" style="background:#fee2e2;color:var(--danger);border:none;padding:5px 8px;border-radius:7px;cursor:pointer;font-size:11px;">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        `).join('');
-
-                        html += `
-                            <div data-isletme="${menu.c.toLowerCase()}" data-email="${(kullanici.email||'').toLowerCase()}" style="background:white;border-radius:20px;padding:24px;border:2px solid #f1f5f9;box-shadow:var(--shadow-sm);transition:0.3s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='#f1f5f9'">
-                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
-                                    <h3 style="margin:0;font-size:17px;font-weight:800;color:var(--text-dark);">${menu.c}</h3>
-                                    <button onclick="window.adminMenuSil('${d.id}')" style="background:#fee2e2;color:var(--danger);border:none;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;flex-shrink:0;">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </div>
-                                <p style="margin:0 0 5px;font-size:13px;color:var(--text-gray);"><i class="fa-solid fa-envelope" style="width:16px;"></i> ${kullanici.email || 'Bilinmiyor'}</p>
-                                <p style="margin:0 0 5px;font-size:13px;color:var(--text-gray);"><i class="fa-solid fa-box" style="width:16px;"></i> ${menu.items ? menu.items.length : 0} ürün</p>
-                                <p style="margin:0 0 14px;font-size:13px;color:var(--text-gray);"><i class="fa-solid fa-calendar" style="width:16px;"></i> ${tarih}</p>
-                                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-                                    <a href="${menuLink}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:white;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;">
-                                        <i class="fa-solid fa-eye"></i> Görüntüle
-                                    </a>
-                                    <button onclick="window.adminUrunleriToggle('${d.id}',this)" style="display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;color:var(--text-dark);border:none;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">
-                                        <i class="fa-solid fa-box"></i> Ürünleri Gör
-                                    </button>
-                                </div>
-                                <div id="urunler-${d.id}" style="display:none;margin-top:8px;">
-                                    ${urunlerHTML || '<p style="color:var(--text-gray);font-size:13px;">Ürün yok.</p>'}
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-
-                html += `</div>`;
-                panel.innerHTML = html;
-
-                // Arama için kart verilerini sakla
-                window._adminKartlar = panel.querySelectorAll('[data-isletme]');
-            } catch(e) {
-                panel.innerHTML = `<p style="color:var(--danger);text-align:center;font-size:16px;">Hata: ${e.message}</p>`;
-            }
-        };
-
-        // ── Menülerim (kullanıcı mevcut menüsünü düzenler) ───────────
-        window.menuleriniGoster = async function() {
-            const user = auth.currentUser;
-            if (!user) return;
-
-            tümPanelleriKapat();
-            document.body.classList.add("sade-arka-plan");
-            document.getElementById("menuPaneli").style.display = "block";
-            document.getElementById("qrCiktisi").style.display = "none";
-            document.getElementById("qrPlaceholder").style.display = "flex";
-            document.getElementById("qrResim").style.display = "none";
-
-            document.getElementById("kategoriListesi").innerHTML = '';
-            katSayac = 0;
-
-            const docSnap = await getDoc(doc(db, "menus", user.uid));
-            if (!docSnap.exists()) {
-                document.getElementById("cafeAdi").value = '';
-                window.yeniKategoriEkle();
-                return;
-            }
-
-            const data = docSnap.data();
-            document.getElementById("cafeAdi").value = data.c || '';
-
-            const katGruplari = {};
-            (data.items || []).forEach(item => {
-                if (!katGruplari[item.k]) katGruplari[item.k] = [];
-                katGruplari[item.k].push(item);
-            });
-
-            for (const katAd in katGruplari) {
-                katSayac++;
-                const liste = document.getElementById("kategoriListesi");
-                const katDiv = document.createElement("div");
-                katDiv.className = "kategori-kutu";
-                katDiv.id = "kat-container-" + katSayac;
-                katDiv.innerHTML = `
-                    <button class="kat-sil-btn" onclick="window.kategoriSil(${katSayac})"><i class="fa-solid fa-trash"></i></button>
-                    <input type="text" class="kategori-baslik-input kat-baslik" placeholder="Kategori Adı" value="${katAd}">
-                    <div id="liste-urunler-${katSayac}"></div>
-                    <button class="buttonÖz" style="background-color:#fff;color:var(--primary);padding:10px 18px;font-size:13px;box-shadow:var(--shadow-sm);margin-top:10px;border:1px solid #e2e8f0;" onclick="window.yeniUrunEkle(${katSayac})">
-                        <i class="fa-solid fa-plus"></i> Yeni Ürün
-                    </button>
-                `;
-                liste.appendChild(katDiv);
-
-                const urunListesi = document.getElementById("liste-urunler-" + katSayac);
-                katGruplari[katAd].forEach(item => {
-                    const div = document.createElement("div");
-                    div.className = "urun-satiri";
-                    div.innerHTML = urunSatiriHTML(item);
-                    urunListesi.appendChild(div);
-                    onizlemeEkle(div);
-                });
-            }
-        };
-
-        // ── Admin: tek ürün silme ─────────────────────────────────────
-        window.adminUrunSil = async function(menuId, idx) {
-            if (!confirm("Bu ürünü silmek istediğinize emin misiniz?")) return;
-            try {
-                const docSnap = await getDoc(doc(db, "menus", menuId));
-                if (!docSnap.exists()) return;
-                const data = docSnap.data();
-                data.items.splice(idx, 1);
-                await setDoc(doc(db, "menus", menuId), data);
-                window.adminPaneliniAc();
-            } catch(e) { alert("Silinemedi: " + e.message); }
-        };
-
-        window.adminUrunleriToggle = function(menuId, btn) {
-            const kutu = document.getElementById("urunler-" + menuId);
-            const gizli = kutu.style.display === 'none';
-            kutu.style.display = gizli ? 'block' : 'none';
-            btn.innerHTML = gizli
-                ? '<i class="fa-solid fa-chevron-up"></i> Gizle'
-                : `<i class="fa-solid fa-box"></i> Ürünleri Gör`;
-        };
-
-        window.adminFiltrele = function() {
-            const aramaText = (document.getElementById("adminArama")?.value || '').toLowerCase().trim();
-            const kartlar = document.querySelectorAll('#adminKartlar [data-isletme]');
-            let gorunen = 0;
-            kartlar.forEach(kart => {
-                const eslesme = kart.dataset.isletme.includes(aramaText) || kart.dataset.email.includes(aramaText);
-                kart.style.display = eslesme ? '' : 'none';
-                if (eslesme) gorunen++;
-            });
-            const bos = document.getElementById("adminBosUyari");
-            if (bos) bos.remove();
-            if (gorunen === 0 && aramaText) {
-                const div = document.createElement('div');
-                div.id = 'adminBosUyari';
-                div.style.cssText = 'grid-column:1/-1;text-align:center;padding:40px;color:var(--text-gray);font-weight:600;';
-                div.innerHTML = '<i class="fa-solid fa-magnifying-glass" style="display:block;font-size:28px;margin-bottom:10px;"></i> Eşleşen işletme bulunamadı.';
-                document.getElementById("adminKartlar").appendChild(div);
-            }
-        };
-
-        window.adminMenuSil = async function(uid) {
-            if (!confirm("Bu menüyü kalıcı olarak silmek istediğinize emin misiniz?")) return;
-            try {
-                await deleteDoc(doc(db, "menus", uid));
-                window.adminPaneliniAc();
-            } catch(e) {
-                alert("Silinemedi: " + e.message);
-            }
-        };
-
-        // ── Müşteri Menüsü (Arama + Filtreleme) ──────────────────────
-        function musteriGorunumuAc(data) {
-            tumMenuVerisi = data;
-            window.secilenKategori = 'Tümü';
-
-            tümPanelleriKapat();
-            document.getElementById("navbar").style.display = "none";
-            document.getElementById("musteriMenusu").style.display = "block";
-            document.body.classList.add("sade-arka-plan");
-            document.getElementById("m-isletmeAdi").innerText = data.c;
-
-            const kategoriler = [...new Set(data.items.map(i => i.k))];
-            const katButonlar = kategoriler.map(k =>
-                `<button class="kat-filtre-btn" onclick="window.kategoriFiltrele('${k}',this)">${k}</button>`
-            ).join('');
-
-            document.getElementById("m-filtre-alan").innerHTML = `
-                <div style="margin-bottom:20px;">
-                    <input type="text" id="aramaInput" placeholder="🔍  Ürün ara..." class="inputStil" oninput="window.menuFiltrele()" style="margin-bottom:12px;">
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                        <button class="kat-filtre-btn aktif" onclick="window.kategoriFiltrele('Tümü',this)">Tümü</button>
-                        ${katButonlar}
-                    </div>
-                </div>
-            `;
-
-            window.menuFiltrele();
-        }
-
-        window.kategoriFiltrele = function(kat, btn) {
-            window.secilenKategori = kat;
-            document.querySelectorAll('.kat-filtre-btn').forEach(b => b.classList.remove('aktif'));
-            btn.classList.add('aktif');
-            window.menuFiltrele();
-        };
-
-        window.menuFiltrele = function() {
-            if (!tumMenuVerisi) return;
-            const aramaText = (document.getElementById("aramaInput")?.value || '').toLowerCase().trim();
-            const kat = window.secilenKategori;
-
-            const gruplar = {};
-            tumMenuVerisi.items.forEach(item => {
-                if (kat !== 'Tümü' && item.k !== kat) return;
-                if (aramaText && !item.a.toLowerCase().includes(aramaText)) return;
-                if (!gruplar[item.k]) gruplar[item.k] = [];
-                gruplar[item.k].push(item);
-            });
-
-            let html = "";
-            for (let k in gruplar) {
-                html += `<div style="margin-bottom:40px;">
-                         <h4 style="color:var(--text-dark);border-bottom:2px solid #f1f5f9;padding-bottom:12px;margin-bottom:20px;font-weight:800;font-size:20px;">${k}</h4>`;
-                gruplar[k].forEach(item => {
-                    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid #f8fafc;">
-                                <div style="display:flex;align-items:center;">
-                                    ${item.i ? `<img src="${item.i}" class="m-urun-img">` : '<div style="width:75px;height:75px;background:#f8fafc;border-radius:18px;margin-right:18px;display:flex;align-items:center;justify-content:center;color:#cbd5e1;"><i class="fa-solid fa-image"></i></div>'}
-                                    <span style="font-weight:600;font-size:16px;color:var(--text-dark);">${item.a}</span>
-                                </div>
-                                <span style="font-weight:800;color:var(--primary);font-size:16px;">${item.f}</span>
-                             </div>`;
-                });
-                html += `</div>`;
-            }
-
-            if (!html) {
-                html = `<div style="text-align:center;padding:60px;color:var(--text-gray);">
-                    <i class="fa-solid fa-magnifying-glass" style="font-size:32px;margin-bottom:12px;display:block;"></i>
-                    Ürün bulunamadı.
-                </div>`;
-            }
-
-            document.getElementById("m-liste").innerHTML = html;
-        };
-    </script>
-</body> 
+    <script type="module" src="app.js"></script>
+</body>
 </html>
